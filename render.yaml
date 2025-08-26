@@ -6,7 +6,7 @@ services:
     branch: main
     buildCommand: "go build -o linkresan-app ./main.go"
     startCommand: "./linkresan-app"
-    healthCheckPath: /healthz # <--- این خط اضافه شده
+    healthCheckPath: /healthz
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -15,6 +15,6 @@ services:
 
 databases:
   - name: linkresan-db
-    databaseName: linkresan_db
-    user: postgres
+    databaseName: linkresan_db # نام دیتابیس شما
+    user: postgres # نام کاربری دیتابیس شما
     plan: free

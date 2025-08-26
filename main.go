@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"github.comcom/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
 
@@ -34,26 +34,24 @@ func generateShortCode(n int) string {
 func main() {
 	connStr := os.Getenv("DATABASE_URL")
 	if connStr == "" {
-		log.Fatal("DATABASE_URL environment variable is not set.")
+		log.Fatal("FATAL: DATABASE_URL environment variable is not set.")
 	}
 
 	var err error
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatal("Error opening database connection: ", err)
+		log.Fatal("FATAL: Error opening database connection: ", err)
 	}
 
-	// تست اتصال به دیتابیس
 	err = db.Ping()
 	if err != nil {
-		log.Fatal("Error pinging database: ", err)
+		log.Fatal("FATAL: Error pinging database: ", err)
 	}
 	log.Println("Database connection successful.")
 	defer db.Close()
 
 	router := gin.Default()
 
-	// مسیر برای Health Check
 	router.GET("/healthz", func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")
 	})
@@ -109,6 +107,6 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	log.Println("Starting server on port:", port)
+	log.Println("INFO: Starting server on port:", port)
 	router.Run(":" + port)
 }
