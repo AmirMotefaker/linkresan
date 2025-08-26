@@ -1,4 +1,4 @@
-# <img src="assets/logo-small.webp" alt="Linkresan Logo" width="32" height="32"> Linkresan.ir (لینک‌رسان)
+# <img src="assets/logo-small.webp" alt="Linkresan Logo" width="64" height="64"> Linkresan.ir (لینک‌رسان)
 
 
 **کوتاه کن. به اشتراک بگذار. با خیال راحت.** ✨ یک سرویس کوتاه‌کننده لینک رایگان و متن‌باز، با افتخار برای ایرانیان. 🇮🇷
