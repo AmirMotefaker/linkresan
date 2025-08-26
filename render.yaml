@@ -1,5 +1,4 @@
 services:
-  # وب سرویس اصلی برنامه
   - type: web
     name: linkresan
     env: go
@@ -7,6 +6,7 @@ services:
     branch: main
     buildCommand: "go build -o linkresan-app ./main.go"
     startCommand: "./linkresan-app"
+    healthCheckPath: /healthz # <--- این خط اضافه شده
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -14,7 +14,6 @@ services:
           property: connectionString
 
 databases:
-  # پایگاه داده پروژه
   - name: linkresan-db
     databaseName: linkresan_db
     user: postgres

@@ -32,7 +32,6 @@ func generateShortCode(n int) string {
 }
 
 func main() {
-	// خواندن اطلاعات اتصال از متغیر DATABASE_URL که توسط Render تزریق می‌شود
 	connStr := os.Getenv("DATABASE_URL")
 	if connStr == "" {
 		log.Fatal("DATABASE_URL environment variable is not set.")
@@ -41,11 +40,23 @@ func main() {
 	var err error
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatal("Error connecting to the database: ", err)
+		log.Fatal("Error opening database connection: ", err)
 	}
+
+	// تست اتصال به دیتابیس
+	err = db.Ping()
+	if err != nil {
+		log.Fatal("Error pinging database: ", err)
+	}
+	log.Println("Database connection successful.")
 	defer db.Close()
 
 	router := gin.Default()
+
+	// مسیر برای Health Check
+	router.GET("/healthz", func(c *gin.Context) {
+		c.String(http.StatusOK, "OK")
+	})
 
 	router.GET("/", func(c *gin.Context) {
 		html := `
@@ -79,25 +90,18 @@ func main() {
 			return
 		}
 
-		log.Println("Successfully created link:", shortCode, "for URL:", originalURL)
 		shortURL := c.Request.Host + "/" + shortCode
 		c.JSON(http.StatusOK, gin.H{"short_url": shortURL})
 	})
 
 	router.GET("/:shortCode", func(c *gin.Context) {
 		shortCode := c.Param("shortCode")
-
 		var originalURL string
 		err := db.QueryRow("SELECT original_url FROM links WHERE short_code = $1", shortCode).Scan(&originalURL)
 		if err != nil {
-			if err == sql.ErrNoRows {
-				c.String(http.StatusNotFound, "404 Not Found")
-				return
-			}
-			c.String(http.StatusInternalServerError, "Internal Server Error.")
+			c.String(http.StatusNotFound, "404 Not Found")
 			return
 		}
-
 		c.Redirect(http.StatusMovedPermanently, originalURL)
 	})
 
