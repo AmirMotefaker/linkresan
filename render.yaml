@@ -2,7 +2,7 @@ services:
   - type: web
     name: linkresan
     env: go
-    goVersion: "1.25.0"
+    goversion: "1.25.0"
     branch: main
     buildCommand: "go build -o linkresan-app ./main.go"
     startCommand: "./linkresan-app"
