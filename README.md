@@ -22,7 +22,7 @@
 **مراحل اجرا:**
 
 1.  مخزن پروژه را کلون کنید:
-    `git clone https://github.com/YOUR-USERNAME/linkresan.git`
+    `git clone https://github.com/AmirMotefaker/linkresan.git`
     `cd linkresan`
 2.  بسته‌های مورد نیاز را نصب کنید:
     `go get`
