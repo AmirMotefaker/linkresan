@@ -2,7 +2,7 @@ services:
   - type: web
     name: linkresan
     env: go
-    goVersion: "1.25.0"
+    goVersion: "1.25.0" # <--- این خط اصلاح شده است
     branch: main
     buildCommand: "go build -o linkresan-app ./main.go"
     startCommand: "./linkresan-app"
@@ -15,6 +15,6 @@ services:
 
 databases:
   - name: linkresan-db
-    databaseName: linkresan_db # نام دیتابیس شما
-    user: postgres # نام کاربری دیتابیس شما
+    databaseName: linkresan_db
+    user: postgres
     plan: free
