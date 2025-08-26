@@ -2,11 +2,10 @@ services:
   - type: web
     name: linkresan
     env: go
-    # شکل صحیح با حرف V بزرگ
     goVersion: "1.25.0"
     branch: main
-    buildCommand: "go build -o linkres-app ./main.go"
-    startCommand: "./linkres-app"
+    buildCommand: "go build -o ./linkresan-app ./main.go"
+    startCommand: "./linkresan-app"
     healthCheckPath: /healthz
     envVars:
       - key: DATABASE_URL
