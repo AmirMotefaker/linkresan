@@ -32,18 +32,12 @@ func generateShortCode(n int) string {
 }
 
 func main() {
-	// خواندن اطلاعات اتصال از متغیرهای محیطی
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-	dbHost := os.Getenv("DB_HOST")
-	dbSSLMode := os.Getenv("DB_SSLMODE")
-
-	if dbUser == "" || dbPassword == "" || dbName == "" || dbHost == "" {
-		log.Fatal("DB environment variables are not set.")
+	// خواندن اطلاعات اتصال از متغیر DATABASE_URL که توسط Render تزریق می‌شود
+	connStr := os.Getenv("DATABASE_URL")
+	if connStr == "" {
+		log.Fatal("DATABASE_URL environment variable is not set.")
 	}
 
-	connStr := "user=" + dbUser + " password=" + dbPassword + " dbname=" + dbName + " host=" + dbHost + " sslmode=" + dbSSLMode
 	var err error
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
