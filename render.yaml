@@ -1,0 +1,23 @@
+services:
+  # وب سرویس اصلی برنامه
+  - type: web
+    name: linkresan
+    env: go
+    goVersion: "1.25.0" # <--- نسخه دقیق Go را اینجا مشخص می‌کنیم
+    branch: main
+    buildCommand: "go build -o linkresan-app ./main.go"
+    startCommand: "./linkresan-app"
+    envVars:
+      - key: PORT
+        value: 10000 # پورت استاندارد Render
+      - fromDatabase:
+          name: linkresan-db # نام دیتابیسی که ساختید
+          property: connectionString
+        key: DATABASE_URL # این متغیر جدیدی است که باید در کد استفاده شود
+
+databases:
+  # پایگاه داده پروژه
+  - name: linkresan-db
+    databaseName: linkresan_db
+    user: postgres
+    plan: free
