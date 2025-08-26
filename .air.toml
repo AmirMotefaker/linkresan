@@ -1,0 +1,17 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/linkresan.exe ."
+bin = "tmp/linkresan.exe"
+log = "air_build.log"
+delay = 1000
+exclude_dir = ["assets", "tmp"]
+exclude_file = []
+
+[log]
+time = false
+
+[watcher]
+paths = ["."]
