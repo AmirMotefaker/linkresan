@@ -3,7 +3,7 @@ services:
   - type: web
     name: linkresan
     env: go
-    goVersion: "1.25.0" # <--- نسخه دقیق Go را اینجا مشخص می‌کنیم
+    goVersion: "1.25.0"
     branch: main
     buildCommand: "go build -o linkresan-app ./main.go"
     startCommand: "./linkresan-app"
