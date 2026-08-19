@@ -1,12 +1,13 @@
 # LinkResan for developers
 
-This page is the public-safe developer entry point for LinkResan. The commercial Production implementation remains private.
+This is the public-safe developer entry point for LinkResan. The commercial Production implementation remains private.
 
-## Public API
+## Public developer surface
 
-- API documentation: https://linkresan-api.onrender.com/docs
 - Product website: https://linkresan.ir
-- Authentication for supported developer integrations is managed through the product dashboard.
+- API keys are created and managed inside the authenticated LinkResan dashboard.
+- Webhooks are a shipped integration capability.
+- Public API/reference material is published only through intentionally public LinkResan surfaces.
 
 ## Supported developer-facing capabilities
 
@@ -14,34 +15,30 @@ This page is the public-safe developer entry point for LinkResan. The commercial
 - API keys
 - Webhooks
 - Analytics-facing product endpoints
-- Custom-domain, bio and team product surfaces where exposed by the public API contract
+- Publicly documented product integrations
 
-## API keys
+## Credential hygiene
 
-API keys are created and managed inside the authenticated LinkResan dashboard. Never commit a real API key to GitHub, examples, issue comments or screenshots.
+Never publish a real API key, token, session credential, webhook secret, production identifier or customer endpoint in GitHub files, issues, pull requests or screenshots.
 
-Use placeholders in documentation:
+Documentation examples must use placeholders only, for example:
 
 ```http
 Authorization: Bearer <YOUR_TOKEN>
 X-API-Key: <YOUR_API_KEY>
 ```
 
-## Webhooks
+## Public example policy
 
-Webhook support is a shipped product capability. Public documentation may describe integration behavior, but private delivery evidence, customer endpoints, credentials and production support data are not published here.
-
-## Examples policy
-
-Examples in this repository must:
+Examples synchronized to the public repository must:
 
 1. use placeholders only;
-2. avoid production account identifiers;
-3. avoid customer/user data;
-4. avoid admin/CRM internals;
-5. avoid billing reconciliation internals;
-6. be reviewable as standalone public material.
+2. contain no customer/user data;
+3. contain no admin/CRM implementation details;
+4. contain no billing reconciliation evidence;
+5. contain no deployment/service identifiers that are not intentionally public;
+6. be explicitly allowlisted by the Production public-sync contract.
 
 ## Source of truth
 
-Feature claims and entitlement behavior originate from the private `AmirMotefaker/LinkResan-Production` repository. This public repository is a curated developer showcase, not a deployable Production mirror.
+Feature claims and entitlement behavior originate from the private `AmirMotefaker/LinkResan-Production` repository. The public `AmirMotefaker/LinkResan` repository is a curated developer showcase, not a deployable Production mirror.
