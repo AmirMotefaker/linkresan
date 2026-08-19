@@ -7,6 +7,9 @@ on:
       - "docs/**"
       - "status.json"
       - ".github/workflows/public-integrity.yml"
+      - "backend/**"
+      - "frontend/**"
+      - "mobile/**"
   push:
     branches:
       - main
@@ -15,6 +18,9 @@ on:
       - "docs/**"
       - "status.json"
       - ".github/workflows/public-integrity.yml"
+      - "backend/**"
+      - "frontend/**"
+      - "mobile/**"
   workflow_dispatch:
 
 permissions:
@@ -96,20 +102,49 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin "${{ github.base_ref }}" --depth=1
-          changed="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
-          printf '%s\n' "$changed"
+          git diff --name-status "origin/${{ github.base_ref }}...HEAD" > /tmp/public-diff.txt
+          cat /tmp/public-diff.txt
 
-          while IFS= read -r file; do
-            [ -z "$file" ] && continue
+          while IFS=$'\t' read -r status file rest; do
+            [ -z "${status:-}" ] && continue
             case "$file" in
               README.md|status.json|docs/*|.github/workflows/public-integrity.yml)
                 ;;
+              backend/*|frontend/*|mobile/*)
+                case "$status" in
+                  D*) ;;
+                  *)
+                    echo "Runtime path may only be deleted during public-showcase cleanup: $status $file"
+                    exit 1
+                    ;;
+                esac
+                ;;
               *)
-                echo "Non-showcase file changed: $file"
-                echo "Failing closed: runtime/deployment scope is not allowed in this PR."
+                echo "Non-showcase file changed: $status $file"
+                echo "Failing closed: unsupported public repository scope."
                 exit 1
                 ;;
             esac
-          done <<< "$changed"
+          done < /tmp/public-diff.txt
 
           echo "Public-showcase scope allowlist passed."
+
+      - name: Require legacy runtime directories to stay absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          for dir in backend frontend mobile; do
+            if [ -e "$dir" ]; then
+              if [ "${{ github.event_name }}" = "pull_request" ]; then
+                if git diff --name-status "origin/${{ github.base_ref }}...HEAD" | awk -v prefix="$dir/" '$1 !~ /^D/ && index($2, prefix) == 1 { found=1 } END { exit found ? 0 : 1 }'; then
+                  echo "Non-deletion runtime content remains or was introduced under $dir/."
+                  exit 1
+                fi
+              else
+                echo "Legacy runtime directory must not exist on public main: $dir/"
+                exit 1
+              fi
+            fi
+          done
+
+          echo "Legacy runtime directory guard passed."
