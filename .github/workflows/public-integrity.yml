@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -38,7 +38,6 @@ jobs:
           import json
           import pathlib
           import re
-          import sys
 
           required = [
               pathlib.Path("README.md"),
@@ -81,7 +80,7 @@ jobs:
           readme = pathlib.Path("README.md").read_text(encoding="utf-8")
           required_readme_markers = [
               "AmirMotefaker/LinkResan-Production",
-              "public-showcase",
+              "Public / Private boundary",
               "پرداخت رمزارزی",
               "Not shipped",
           ]
@@ -91,7 +90,7 @@ jobs:
 
           print("Public showcase content validation passed.")
 
-      - name: Ensure this PR does not modify runtime/deployment scope
+      - name: Ensure this PR is public-showcase scope only
         if: github.event_name == 'pull_request'
         shell: bash
         run: |
@@ -100,9 +99,17 @@ jobs:
           changed="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
           printf '%s\n' "$changed"
 
-          if printf '%s\n' "$changed" | grep -E '^(backend/|frontend/|mobile/|docker-compose|Dockerfile|vercel\.json|render\.yaml|\.env($|\.)|infra/|terraform/)' >/dev/null; then
-            echo "Runtime/deployment file changed in a public-brand PR. Failing closed."
-            exit 1
-          fi
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$file" in
+              README.md|status.json|docs/*|.github/workflows/public-integrity.yml)
+                ;;
+              *)
+                echo "Non-showcase file changed: $file"
+                echo "Failing closed: runtime/deployment scope is not allowed in this PR."
+                exit 1
+                ;;
+            esac
+          done <<< "$changed"
 
-          echo "Runtime/deployment scope guard passed."
+          echo "Public-showcase scope allowlist passed."
