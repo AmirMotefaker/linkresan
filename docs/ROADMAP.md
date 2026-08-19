@@ -33,3 +33,7 @@ Potential areas may include:
 - More developer tooling
 
 Final availability is determined by the Production product catalog.
+
+## Product truth rule
+
+Public roadmap language follows verified product state. A concept is not described as shipped until it exists in the accepted Production product catalog.
