@@ -1,0 +1,108 @@
+name: Public Integrity
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "docs/**"
+      - "status.json"
+      - ".github/workflows/public-integrity.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "docs/**"
+      - "status.json"
+      - ".github/workflows/public-integrity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-integrity:
+    name: Public Showcase Integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate public files
+        shell: python
+        run: |
+          import json
+          import pathlib
+          import re
+          import sys
+
+          required = [
+              pathlib.Path("README.md"),
+              pathlib.Path("docs/ARCHITECTURE.md"),
+              pathlib.Path("docs/DEVELOPERS.md"),
+              pathlib.Path("docs/ROADMAP.md"),
+              pathlib.Path("docs/SECURITY.md"),
+              pathlib.Path("status.json"),
+          ]
+
+          missing = [str(path) for path in required if not path.is_file()]
+          if missing:
+              raise SystemExit("Missing required public files: " + ", ".join(missing))
+
+          status = json.loads(pathlib.Path("status.json").read_text(encoding="utf-8"))
+          if status.get("repositoryRole") != "public-showcase":
+              raise SystemExit("status.json repositoryRole must be public-showcase")
+          if status.get("sourceOfTruth") != "AmirMotefaker/LinkResan-Production":
+              raise SystemExit("status.json sourceOfTruth is invalid")
+
+          public_files = [
+              pathlib.Path("README.md"),
+              pathlib.Path("status.json"),
+              *pathlib.Path("docs").rglob("*.md"),
+          ]
+
+          patterns = {
+              "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+              "GitHub token": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+              "OpenAI-style secret": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
+              "JWT-like bearer": re.compile(r"\beyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b"),
+          }
+
+          for path in public_files:
+              text = path.read_text(encoding="utf-8", errors="strict")
+              for label, pattern in patterns.items():
+                  if pattern.search(text):
+                      raise SystemExit(f"Possible {label} found in {path}")
+
+          readme = pathlib.Path("README.md").read_text(encoding="utf-8")
+          required_readme_markers = [
+              "AmirMotefaker/LinkResan-Production",
+              "public-showcase",
+              "پرداخت رمزارزی",
+              "Not shipped",
+          ]
+          for marker in required_readme_markers:
+              if marker not in readme:
+                  raise SystemExit(f"README missing required marker: {marker}")
+
+          print("Public showcase content validation passed.")
+
+      - name: Ensure this PR does not modify runtime/deployment scope
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          changed="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
+          printf '%s\n' "$changed"
+
+          if printf '%s\n' "$changed" | grep -E '^(backend/|frontend/|mobile/|docker-compose|Dockerfile|vercel\.json|render\.yaml|\.env($|\.)|infra/|terraform/)' >/dev/null; then
+            echo "Runtime/deployment file changed in a public-brand PR. Failing closed."
+            exit 1
+          fi
+
+          echo "Runtime/deployment scope guard passed."
