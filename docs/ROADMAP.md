@@ -6,7 +6,7 @@ This roadmap contains public-safe product direction only. It is not a commitment
 
 - Persian-first RTL experience
 - Link management
-- Custom slugs
+- Custom aliases and slugs
 - Analytics foundations
 - Custom domains
 - Link-in-bio capabilities
@@ -37,3 +37,7 @@ Final availability is determined by the Production product catalog.
 ## Product truth rule
 
 Public roadmap language follows verified product state. A concept is not described as shipped until it exists in the accepted Production product catalog.
+
+## Public boundary
+
+The public repository documents direction and capability truth. Private implementation plans, internal operational priorities, delivery schedules and non-public experiments remain in the Production repository.
