@@ -9,6 +9,7 @@ LinkResan is a Persian-first smart link platform for users, teams and developers
 Describe verified product behavior, not assumptions.
 
 Use:
+
 - shipped
 - partial
 - preview
@@ -29,13 +30,19 @@ The public repository communicates:
 ## Boundary
 
 Public repository:
+
 - product showcase
 - documentation
 - public-safe examples
 
 Private Production repository:
+
 - commercial implementation
 - operational details
 - private evidence
 
 Do not publish credentials, customer data, CRM internals or deployment secrets.
+
+## Brand consistency
+
+Public copy should be clear, useful and aligned with accepted Production truth. Avoid announcing roadmap ideas as available features.
