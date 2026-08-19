@@ -2,15 +2,20 @@
   "product": "LinkResan",
   "repositoryRole": "public-showcase",
   "sourceOfTruth": "AmirMotefaker/LinkResan-Production",
-  "status": {
+  "visibility": "public-safe",
+  "policy": {
+    "noSecrets": true,
+    "noPrivateOperationalData": true,
+    "noAdminCrmInternals": true,
+    "allowlistOnly": true
+  },
+  "categories": {
     "linkManagement": "shipped",
     "analytics": "partial",
-    "customDomains": "shipped",
-    "apiKeys": "shipped",
-    "webhooks": "shipped",
-    "rialBilling": "shipped",
-    "cryptoBilling": "not-shipped",
+    "billingRial": "shipped",
+    "billingCrypto": "not-shipped",
     "mobileNative": "preview"
   },
-  "generatedFor": "public-documentation"
+  "sourceMilestone": "production-merge-1ea0d3215cf4d83083ad4abe5785daf3f6aca260",
+  "generatedAt": "2026-08-19T14:27:00+03:30"
 }
