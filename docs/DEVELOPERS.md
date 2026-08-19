@@ -1,31 +1,44 @@
 # LinkResan for developers
 
-This page is the public-safe developer entry point for LinkResan. The commercial Production implementation remains private.
+This is the public-safe developer entry point for LinkResan. The commercial Production implementation remains private.
 
 ## Public developer surface
 
-Current public-facing concepts:
+- Product website: https://linkresan.ir
+- API keys are created and managed inside the authenticated LinkResan dashboard.
+- Webhooks are a shipped integration capability.
+- Public API/reference material is published only through intentionally public LinkResan surfaces.
 
+## Supported developer-facing capabilities
+
+- Link creation and management
 - API keys
 - Webhooks
-- Integration-oriented documentation
-- Product-level API concepts
+- Analytics-facing product endpoints
+- Publicly documented product integrations
 
-## Credential safety
+## Credential hygiene
 
-Never publish:
+Never publish a real API key, token, session credential, webhook secret, production identifier or customer endpoint in GitHub files, issues, pull requests or screenshots.
 
-- API tokens
-- session cookies
-- private keys
-- environment files
-- customer identifiers
-- production endpoints or internal service URLs
+Documentation examples must use placeholders only, for example:
 
-## Production boundary
+```http
+Authorization: Bearer <YOUR_TOKEN>
+X-API-Key: <YOUR_API_KEY>
+```
 
-The public repository is not a deployable SDK mirror or backend source tree.
+## Public example policy
 
-For production implementation, operational access, and commercial development workflows, the private canonical repository is:
+Examples synchronized to the public repository must:
 
-`AmirMotefaker/LinkResan-Production`
+1. use placeholders only;
+2. contain no customer/user data;
+3. contain no admin/CRM implementation details;
+4. contain no billing reconciliation evidence;
+5. contain no deployment/service identifiers that are not intentionally public;
+6. be explicitly allowlisted by the Production public-sync contract.
+
+## Source of truth
+
+Feature claims and entitlement behavior originate from the private `AmirMotefaker/LinkResan-Production` repository. The public `AmirMotefaker/LinkResan` repository is a curated developer showcase, not a deployable Production mirror.
