@@ -1,0 +1,16 @@
+{
+  "product": "LinkResan",
+  "repositoryRole": "public-showcase",
+  "sourceOfTruth": "AmirMotefaker/LinkResan-Production",
+  "status": {
+    "linkManagement": "shipped",
+    "analytics": "partial",
+    "customDomains": "shipped",
+    "apiKeys": "shipped",
+    "webhooks": "shipped",
+    "rialBilling": "shipped",
+    "cryptoBilling": "not-shipped",
+    "mobileNative": "preview"
+  },
+  "generatedFor": "public-documentation"
+}
