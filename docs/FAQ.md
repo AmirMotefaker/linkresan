@@ -27,3 +27,7 @@ Native mobile is currently not represented as fully shipped.
 ## Is crypto payment available?
 
 No. Cryptocurrency billing is not shipped.
+
+## How does the public repository stay current?
+
+Public updates are created from reviewed, allowlisted material from the private Production source. This repository is a showcase, not a deployable mirror.
