@@ -1,31 +1,39 @@
 # LinkResan public security guidance
 
-This document defines what security information belongs in the public repository.
+This document defines the public disclosure boundary for the LinkResan showcase repository. It is not a production security runbook.
 
-## Publicly documented
+## Never publish
 
-- Secure development practices
-- Public API usage guidance
-- Responsible disclosure expectations
-- Public/private repository boundary
+The public synchronization process must reject or stop on material containing:
 
-## Never publish here
+- real API keys, access tokens, session tokens or private keys;
+- database credentials, database URLs or dumps;
+- payment gateway credentials, reconciliation records or private payment evidence;
+- customer/user data or private support data;
+- admin/CRM implementation details or private operational fields;
+- deployment credentials, environment values or non-public service identifiers;
+- private audit evidence or internal operational topology.
 
-- API keys
-- Access tokens
-- Session cookies
-- Database credentials
-- Payment gateway secrets
-- Customer information
-- Internal admin records
-- CRM data
-- Production audit evidence
-- Private deployment configuration
+## Documentation examples
 
-## Reporting
+Use placeholders only, for example:
 
-Do not publish sensitive vulnerability details in public issues. Contact the LinkResan team through the official product channels with enough information to reproduce the issue safely.
+```text
+<YOUR_API_KEY>
+<YOUR_TOKEN>
+<PUBLIC_EXAMPLE_ID>
+```
 
-## Production boundary
+Never replace placeholders with live values in public files, issues, pull requests or screenshots.
 
-Production operations remain in `AmirMotefaker/LinkResan-Production`. This repository is intended for public-safe product information and developer resources.
+## Public claims
+
+Security statements in public material must describe only behavior that has been verified in Production. Avoid absolute claims such as "unbreakable", "fully secure" or guarantees that cannot be demonstrated.
+
+## Vulnerability reporting
+
+Do not place sensitive vulnerability details, credentials, customer data or exploit evidence in a public GitHub issue. Use the contact/support path published by LinkResan instead.
+
+## Repository boundary
+
+`AmirMotefaker/LinkResan-Production` remains the private canonical Production source. `AmirMotefaker/LinkResan` is a sanitized public showcase and developer record.
