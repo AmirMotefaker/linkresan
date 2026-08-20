@@ -1,43 +1,45 @@
 # LinkResan public roadmap
 
-This roadmap contains public-safe product direction only. It is not a commitment to private delivery dates.
+This roadmap is intentionally public-safe. It records product capability state without publishing confidential commercial planning, operational deadlines, private evidence, or internal implementation details.
 
-## Shipped foundations
+## Shipped
 
-- Persian-first RTL experience
-- Link management
-- Custom aliases and slugs
-- Analytics foundations
+- Core link shortening and management
+- Custom aliases
+- Expiration and click limits
+- Password-protected links
+- Bulk link creation
+- AI-assisted naming
+- Core analytics
 - Custom domains
-- Link-in-bio capabilities
-- Developer API capabilities
-- Webhooks
-- Team capabilities
-- Rial payment flow
+- Link-in-bio
+- API key management
+- Webhook management
+- Team management
+- Persian-first RTL experience
+- Rial billing
 
-## Current public focus
+## Partial / preview
 
-- Improving developer experience
-- Expanding public documentation
-- Improving analytics visibility
-- Strengthening product reliability
-- Improving brand and community presence
+- Extended device/OS analytics and weekly analytics views
+- Analytics retention behavior by plan
+- Campaign / UTM tooling
+- Native mobile client
+- Selected open-source/public materials
 
-## Future exploration
+`Partial` and `Preview` are deliberate product-truth states and must not be advertised as fully shipped.
 
-Potential areas may include:
+## Not shipped
 
-- More automation capabilities
-- Additional integrations
-- Expanded analytics experiences
-- More developer tooling
+- Cryptocurrency billing
 
-Final availability is determined by the Production product catalog.
+## Public GitHub workstream
 
-## Product truth rule
+- Maintain the public repository as a brand/product/developer showcase.
+- Publish only explicitly allowlisted, sanitized material from Production.
+- Create public updates through dedicated branches and pull requests.
+- Keep Production private and canonical even when public synchronization fails.
 
-Public roadmap language follows verified product state. A concept is not described as shipped until it exists in the accepted Production product catalog.
+## Roadmap policy
 
-## Public boundary
-
-The public repository documents direction and capability truth. Private implementation plans, internal operational priorities, delivery schedules and non-public experiments remain in the Production repository.
+Future items shown here are directional unless explicitly marked `Shipped`. No date, availability promise or commercial commitment should be inferred from an item being listed in this document.

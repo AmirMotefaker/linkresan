@@ -2,32 +2,42 @@
 
 ## Is LinkResan only a URL shortener?
 
-No. It provides link management, analytics capabilities, branding features and developer integrations.
+No. LinkResan is a product platform for creating, managing and understanding links. It includes management controls, analytics capabilities, branding features and developer integrations.
 
-## Is this the Production code?
+## Is the public GitHub repository the Production code?
 
-No. Production source remains private in `AmirMotefaker/LinkResan-Production`.
+No. The public repository is a curated showcase. Production source remains private in:
 
-## Why is the code private?
+`AmirMotefaker/LinkResan-Production`
 
-LinkResan is a commercial product. Public documentation is shared without exposing private implementation.
+## Why is the code not fully public?
+
+LinkResan is a commercial product. Public documentation, product concepts and selected safe materials are shared without exposing private operational or commercial implementation.
+
+## Does LinkResan support teams?
+
+Yes. Team management is a shipped product capability.
 
 ## Does LinkResan support developers?
 
-Yes. API keys and webhooks are public product capabilities.
+Yes. API keys and webhooks are supported developer-facing capabilities. Public examples must never contain real credentials.
 
 ## Is AI part of LinkResan?
 
-AI-assisted naming is shipped. Other AI experiences are only published after product truth validation.
+AI-assisted naming is a shipped capability. Other AI-related experiences are published only when they pass product truth validation.
 
-## Is mobile available?
+## Is mobile application available?
 
-Native mobile is currently not represented as fully shipped.
+A native mobile client is currently in a partial/preview state and should not be represented as fully shipped.
 
-## Is crypto payment available?
+## Is cryptocurrency payment available?
 
-No. Cryptocurrency billing is not shipped.
+No. Cryptocurrency billing is currently not shipped.
 
-## How does the public repository stay current?
+## How do I report security issues?
 
-Public updates are created from reviewed, allowlisted material from the private Production source. This repository is a showcase, not a deployable mirror.
+Do not publish sensitive details in public issues. Use the official support/contact path.
+
+## Where is the latest product truth?
+
+Public claims originate from the canonical Production repository and are synchronized through a reviewed, fail-closed public showcase process.

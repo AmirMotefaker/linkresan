@@ -2,47 +2,75 @@
 
 ## Positioning
 
-LinkResan is a Persian-first smart link platform for users, teams and developers.
+LinkResan is a Persian-first smart link platform that helps people, teams and developers create better link experiences with management, analytics and integrations.
 
-## Public message
+## Brand message
 
-Describe verified product behavior, not assumptions.
+### Short description
 
-Use:
+Smart links for modern Persian-first products, creators and teams.
 
-- shipped
-- partial
-- preview
-- not shipped
+### Long description
 
-as meaningful product states.
+LinkResan combines professional link management, analytics, integrations and a Persian-first experience into a product platform designed for modern digital workflows.
 
-## GitHub role
+## Public communication principles
 
-The public repository communicates:
+### Be specific
+
+Describe shipped behavior, not assumptions. Capability status must match the canonical product truth.
+
+### Be transparent
+
+`Shipped`, `Partial`, `Preview` and `Not shipped` are meaningful states.
+
+### Respect the boundary
+
+The public repository represents the product story and developer experience. The private Production repository contains commercial implementation and operational details.
+
+## Visual direction
+
+Recommended public presentation:
+
+- clean SaaS style
+- strong readability
+- Persian and English support
+- RTL-aware layouts
+- product-focused screenshots
+- minimal technical noise
+
+## GitHub presence goals
+
+The public repository should communicate:
 
 1. What LinkResan does.
 2. Who benefits from it.
-3. Available capabilities.
-4. Public developer entry points.
-5. High-level product direction.
+3. Which capabilities are available today.
+4. How developers can understand public integration points.
+5. Where the product is going at a high level.
 
-## Boundary
+## Avoid
+
+Do not publish:
+
+- private dashboards
+- customer information
+- CRM workflows
+- payment reconciliation records
+- credentials
+- deployment topology
+- internal commercial strategy
+
+## Repository identity
 
 Public repository:
 
-- product showcase
-- documentation
-- public-safe examples
+`AmirMotefaker/LinkResan`
 
-Private Production repository:
+Role:
 
-- commercial implementation
-- operational details
-- private evidence
+Public product showcase and developer-facing record.
 
-Do not publish credentials, customer data, CRM internals or deployment secrets.
+Source of truth:
 
-## Brand consistency
-
-Public copy should be clear, useful and aligned with accepted Production truth. Avoid announcing roadmap ideas as available features.
+`AmirMotefaker/LinkResan-Production`
