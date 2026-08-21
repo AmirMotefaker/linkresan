@@ -208,6 +208,6 @@ Public updates are prepared from explicitly allowlisted Production material and 
 
 **LinkResan — ساخت لینک کمتر نیست؛ مدیریت تجربه لینک است.**
 
-<sub>Public snapshot source milestone: `issue63-e2e-v2` · generated: `2026-08-21T02:20:40+03:30`</sub>
+<sub>Public snapshot source milestone: `issue53-knowledge-foundation-v1-2026-08-17` · generated: `2026-08-21T02:20:40+03:30`</sub>
 
 </div>
